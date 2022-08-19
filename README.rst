@@ -252,10 +252,11 @@ We can select all the stations within this boundary box that have daily mean str
 
     nwis = NWIS()
     query = {
-        **nwis.query_bybox(bbox),
+        "bBox": ",".join(f"{b:.06f}" for b in bbox),
         "hasDataTypeCd": "dv",
-        "outputDataTypeCd": "dv",
+        "outputDataTypeCd": "dv"
     }
+    
     info_box = nwis.get_info(query)
     dates = ("2000-01-01", "2010-12-31")
     stations = info_box[
